@@ -1,0 +1,30 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nidoveralis/movies-explorer-api.git"
+  },
+  "author": "Alina Diakova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nidoveralis/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/nidoveralis/movies-explorer-api#readme",
+  "dependencies": {
+    "cookie-parse": "^0.4.0",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.3",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
