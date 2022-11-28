@@ -1,8 +1,16 @@
-const router = require('express').Router;
+const router = require('express').Router();
 const cookieParser = require('cookie-parser');
 
-const user = require('./user');
+const auth = require('../middlewares/auth');
+const {login, createUser} = require('../controllers/user');
+const users = require('./users');
+const movies = require('./movies')
 
-router.use('/users', user);
+router.post('/signin', login);
+router.post('/signup', createUser);
+
+router.use(cookieParser());
+router.use('/users', auth, users);
+router.use('/movies', auth, movies);
 
 module.exports = router;
