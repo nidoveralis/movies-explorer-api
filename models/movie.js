@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { isUrl } = require('validator');
+const { isURL } = require('validator');
 
 const movieSchema = new mongoose.Schema ({
   country: {
@@ -14,19 +14,19 @@ const movieSchema = new mongoose.Schema ({
     required: true,
     type: Number,
   },
-  duryearation: {
+  year: {
     required: true,
     type: Number,
   },
   description: {
     required: true,
-    type: Number,
+    type: String,
   },
   image: {
     required: true,
     type: String,
     validate: {
-      validator: (v)=>isUrl(v, { required_protocol: true }),
+      validator: (v)=>isURL(v, { required_protocol: true }),
       message: 'Некорректная ссылка'
     }
   },
@@ -34,7 +34,7 @@ const movieSchema = new mongoose.Schema ({
     required: true,
     type: String,
     validate: {
-      validator: (v)=>isUrl(v, { required_protocol: true }),
+      validator: (v)=>isURL(v, { required_protocol: true }),
       message: 'Некорректная ссылка'
     }
   },
@@ -42,7 +42,7 @@ const movieSchema = new mongoose.Schema ({
     required: true,
     type: String,
     validate: {
-      validator: (v)=>isUrl(v, { required_protocol: true }),
+      validator: (v)=>isURL(v, { required_protocol: true }),
       message: 'Некорректная ссылка'
     }
   },
@@ -51,14 +51,14 @@ const movieSchema = new mongoose.Schema ({
     type: mongoose.ObjectId
   },
   movieId: {//////fix
-    required: true,
+    ///required: true,
     type: Number,
   },
   nameRU: {
     required: true,
     type: String,
   },
-  nameEn: {
+  nameEN: {
     required: true,
     type: String,
   },
