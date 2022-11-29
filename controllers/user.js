@@ -22,6 +22,12 @@ module.exports.login = (req, res) => {
     })
 };
 
+module.exports.exit=(req,res)=>{
+  res.clearCookie('jwt', {httpOnly: true});
+    res.status(200).send({message: "OK"})
+
+}
+
 module.exports.getUser = (req, res) => {
   User.find({})
   .then((user) => res.status(200).send(user))
