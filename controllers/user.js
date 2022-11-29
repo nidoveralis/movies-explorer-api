@@ -35,16 +35,14 @@ module.exports.getUser = (req, res) => {
 };
 
 module.exports.getMe = (req, res) => {
-  console.log('in getMe')
   User.findbyId(req.user._id)
   .then((user) => res.status(200).send(user))
   .catch((err)=>console.log(err))
 };
 
 module.exports.editUser = (req, res) => {
-  console.log(req.body, res.body)
-  const {name, email, password} = req.body
-  User.findByIdAndUpdate('638326417080d48ae24e0ffd', {name, email, password})///in change
+  const {name, email} = req.body
+  User.findByIdAndUpdate(req.user._id, {name, email})///in change
     .then((user) => res.status(200).send(user))
     .catch((err)=>console.log(err))
 };
