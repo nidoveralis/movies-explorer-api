@@ -9,6 +9,8 @@ const router = require('./routes/router');
 const {errorLogger, requestLogger} = require('./middlewares/logger');
 const errorsHandler = require('./middlewares/errorsHandler');
 
+cors
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

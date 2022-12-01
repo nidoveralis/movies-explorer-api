@@ -1,14 +1,15 @@
 const movie = require('../models/movie');
 const Movie = require('../models/movie');
+const IncorrectData = require('../errors/IncorrectData');
+const NotFound = require('../errors/NotFound');
 
-module.exports.getMoveis = (req,res) => {
+module.exports.getMoveis = (req,res, next) => {
   Movie.find({})
     .then(data=> res.status(200).send(data))
-    .catch((err)=>console.log(err))
+    .catch(next)
 }
-module.exports.addMovie = (req,res)=>{
+module.exports.addMovie = (req,res, next)=>{
   const owner = req.user._id;
-  console.log(req.body)
   const {
     id,
     country,
@@ -46,15 +47,25 @@ module.exports.addMovie = (req,res)=>{
       nameEN: data.nameEN
       })
     )
-    .catch((err)=>console.log(err))
+    .catch((err)=>{
+      if(err.name === 'ValidationError'){
+        next(new IncorrectData('Переданы некорректные данные.'))
+      }else {
+        next(err)
+      }
+
+    })
 }
 
-module.exports.deleteMovie = (req,res) =>{
-  console.log(req.params.movieId)
+module.exports.deleteMovie = (req, res, next) =>{
   Movie.findById(req.params.movieId)
   .then((movie)=>{
-    res.send({data:movie })
+    if(movie==null) {
+      next(new NotFound('Фильм не найден.'))
+    }else {
+      res.send({data:movie })
+    }
     return movie.remove();
   })
-  .catch((err)=>console.log(err))
+  .catch(next)
   }
