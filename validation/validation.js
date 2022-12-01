@@ -1,5 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-const linkValidation = require('../constants');
+const { linkValidation } = require('../constants');
 
 module.exports.validationSingIn = celebrate({
   body: Joi.object().keys({
@@ -24,7 +24,7 @@ module.exports.validationEditUser = celebrate({
 });
 
 module.exports.validationAddedMovie = celebrate({
-  body: Joi.object().keys.apply({
+  body: Joi.object().keys({
     country: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.string().required(),
@@ -34,7 +34,7 @@ module.exports.validationAddedMovie = celebrate({
     trailer: Joi.string().required().pattern(linkValidation),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
-    thumbnail: Joi.string().required(),
+    thumbnail: Joi.string().required().pattern(linkValidation),
     id: Joi.number().required(),
   }),
 });
