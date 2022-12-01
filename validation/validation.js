@@ -25,17 +25,17 @@ module.exports.validationEditUser = celebrate({
 
 module.exports.validationAddedMovie = celebrate({
   body: Joi.object().keys.apply({
-    country: Joi.string().require(),
-    director: Joi.string().require(),
-    duration: Joi.string().require(),
-    year: Joi.number().require(),
-    description: Joi.string().require(),
-    image: Joi.string().require().pattern(linkValidation),
-    trailer: Joi.string().require().pattern(linkValidation),
-    nameRU: Joi.string().require(),
-    nameEN: Joi.string().require(),
-    thumbnail: Joi.string().require(),
-    id: Joi.number().require(),
+    country: Joi.string().required(),
+    director: Joi.string().required(),
+    duration: Joi.string().required(),
+    year: Joi.number().required(),
+    description: Joi.string().required(),
+    image: Joi.string().required().pattern(linkValidation),
+    trailer: Joi.string().required().pattern(linkValidation),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
+    thumbnail: Joi.string().required(),
+    id: Joi.number().required(),
   }),
 });
 
