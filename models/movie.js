@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { isURL } = require('validator');
 
-const movieSchema = new mongoose.Schema ({
+const movieSchema = new mongoose.Schema({
   country: {
     required: true,
     type: String,
@@ -26,31 +26,31 @@ const movieSchema = new mongoose.Schema ({
     required: true,
     type: String,
     validate: {
-      validator: (v)=>isURL(v, { required_protocol: true }),
-      message: 'Некорректная ссылка'
-    }
+      validator: (v) => isURL(v, { required_protocol: true }),
+      message: 'Некорректная ссылка',
+    },
   },
   trailerLink: {
     required: true,
     type: String,
     validate: {
-      validator: (v)=>isURL(v, { required_protocol: true }),
-      message: 'Некорректная ссылка'
-    }
+      validator: (v) => isURL(v, { required_protocol: true }),
+      message: 'Некорректная ссылка',
+    },
   },
   thumbnail: {
     required: true,
     type: String,
     validate: {
-      validator: (v)=>isURL(v, { required_protocol: true }),
-      message: 'Некорректная ссылка'
-    }
+      validator: (v) => isURL(v, { required_protocol: true }),
+      message: 'Некорректная ссылка',
+    },
   },
   owner: {
     required: true,
-    type: mongoose.ObjectId
+    type: mongoose.ObjectId,
   },
-  id: {//////fix
+  id: { /// ///fix
     required: true,
     type: Number,
   },

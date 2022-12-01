@@ -1,13 +1,13 @@
 const express = require('express');
-const {errors} = require('celebrate');
+const { errors } = require('celebrate');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const router = require('./routes/router');
-const {errorLogger, requestLogger} = require('./middlewares/logger');
+const { errorLogger, requestLogger } = require('./middlewares/logger');
 const errorsHandler = require('./middlewares/errorsHandler');
 
-const {PORT=3000} = process.env;
+const { PORT = 3000 } = process.env;
 
 const allowedCors = [
   'https://movie.diakova.nomoredomains.club',
@@ -36,21 +36,21 @@ app.use((req, res, next) => {
   return next();
 });
 
-//cors
-//api.movie.diak.nomoredomains.club
-//movie.diakova.nomoredomains.club
-//51.250.87.93
+// cors
+// api.movie.diak.nomoredomains.club
+// movie.diakova.nomoredomains.club
+// 51.250.87.93
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://0.0.0.0:27017/moviedb');
 
-app.use(requestLogger)
+app.use(requestLogger);
 app.use(router);
 
 app.use(errorLogger);
 app.use(errors());
-app.use(errorsHandler)
+app.use(errorsHandler);
 
-app.listen(PORT, ()=>console.log(PORT))
+app.listen(PORT, () => console.log(PORT));

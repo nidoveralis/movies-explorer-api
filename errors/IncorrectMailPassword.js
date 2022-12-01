@@ -4,4 +4,4 @@ module.exports = class IncorrectMailOrPassword extends Error {
     this.statusCode = 401;
     this.errorMessage = message;
   }
-}
+};

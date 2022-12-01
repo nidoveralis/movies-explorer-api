@@ -4,4 +4,4 @@ module.exports = class ErrorDefault extends Error {
     this.statusCode = 500;
     this.errorMessage = message;
   }
-}
+};

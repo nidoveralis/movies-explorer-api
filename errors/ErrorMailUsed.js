@@ -4,4 +4,4 @@ module.exports = class ErroeMailUsed extends Error {
     this.statusCode = 409;
     this.errorMessage = message;
   }
-}
+};
