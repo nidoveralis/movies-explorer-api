@@ -45,8 +45,8 @@ module.exports.getUser = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.getMe = (req, res, next) => {
-  User.findbyId(req.user._id)
+module.exports.getUserMe = (req, res, next) => {
+  User.findById(req.user._id)
     .then((user) => res.status(200).send(user))
     .catch(next);
 };
