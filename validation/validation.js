@@ -18,8 +18,8 @@ module.exports.validationSingUp = celebrate({
 
 module.exports.validationEditUser = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
+    email: Joi.string().email(),
+    name: Joi.string().min(2).max(30),
   }),
 });
 
@@ -41,4 +41,4 @@ module.exports.validationAddedMovie = celebrate({
 
 module.exports.validationMovieId = celebrate({
   params: Joi.object().keys({ movieId: Joi.string().required().length(24).hex() }),
-});
+}); 

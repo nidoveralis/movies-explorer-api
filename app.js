@@ -36,7 +36,7 @@ app.use((req, res, next) => {
   return next();
 });
 
-// cors
+// dominname
 // api.movie.diak.nomoredomains.club
 // movie.diakova.nomoredomains.club
 // 51.250.87.93
