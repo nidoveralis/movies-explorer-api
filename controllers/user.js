@@ -16,7 +16,7 @@ module.exports.createUser = (req, res, next) => {
           if (err.code === 11000) {
             next(new ErrorMailUsed('Пользователь с таким email уже зарегистрирован.'));
           } if (statusCode === 400) {
-          //if (err.name === 'ValidationError') { delete movies by id
+          // if (err.name === 'ValidationError') { delete movies by id
             next(new IncorrectData('Переданы некорректные данные.'));
           } else {
             next(err);

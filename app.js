@@ -9,40 +9,37 @@ const errorsHandler = require('./middlewares/errorsHandler');
 
 const { PORT = 3000 } = process.env;
 
-//const allowedCors = [
-  //'https://movie.diakova.nomoredomains.club',
-  //'http://movie.diakova.nomoredomains.club',
-  //'https://api.movie.diak.nomoredomains.club',
- // 'http://api.movie.diak.nomoredomains.club',
- // 'http://localhost:3000',
-//];
+const allowedCors = [
+  'https://movie.diakova.nomoredomains.club',
+  'http://movie.diakova.nomoredomains.club',
+  'https://api.movie.diak.nomoredomains.club',
+  'http://api.movie.diak.nomoredomains.club',
+  'http://localhost:3000',
+];
 
 const app = express();
 
-//app.use((req, res, next) => {
-  //const { origin } = req.headers;
- // const { method } = req;
- // const requestHeaders = req.headers['access-control-request-headers'];
-  //const allowMethods = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-  //if (allowedCors.includes(origin)) {
-  //  res.header('Access-Control-Allow-Origin', origin);
-  //  res.header('Access-Control-Allow-Credentials', 'true');
- // }
-  //if (method === 'OPTIONS') {
-  //  res.header('Access-Control-Allow-Headers', requestHeaders);
-  //  res.header('Access-Control-Allow-Methods', allowMethods);
-   // return res.end();
- // }
- // return next();
-//});
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  const { method } = req;
+  const requestHeaders = req.headers['access-control-request-headers'];
+  const allowMethods = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
+  }
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+    res.header('Access-Control-Allow-Methods', allowMethods);
+    return res.end();
+  }
+  return next();
+});
 
 // dominname
 // api.movie.diak.nomoredomains.club
 // movie.diakova.nomoredomains.club
 // 51.250.73.230
-
-//@kspshnik @artemkurch не запускается бэкенд на сервере, т.к. занят 3000 порт, не могу его отключить, помогите, плиз
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
