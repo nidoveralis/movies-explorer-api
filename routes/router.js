@@ -20,3 +20,4 @@ router.use('*', auth, (req, res, next) => {
 });
 
 module.exports = router;
+//JWT_SECRET=517ba74d3bc900db5f820165235d63fb84d69f34bba38b9685be361783d8996f

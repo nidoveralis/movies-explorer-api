@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
   let payload;
   try {
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+    console.log(JWT_SECRET, NODE_ENV)
   } catch (err) {
     next(new IncorrectMailOrPassword('Необходима авторизация.'));
     return;
