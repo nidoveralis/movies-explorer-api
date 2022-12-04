@@ -7,7 +7,7 @@ const users = require('./users');
 const movies = require('./movies');
 const NotFound = require('../errors/NotFound');
 
-router.post('/signin', validationSingIn, login);
+router.post('/signin', validationSingIn, createUser);
 router.post('/signup', validationSingUp, createUser);
 
 router.use(cookieParser());
