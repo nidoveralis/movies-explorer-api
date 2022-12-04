@@ -8,7 +8,7 @@ const movies = require('./movies');
 const NotFound = require('../errors/NotFound');
 
 router.post('/signin', validationSingIn, login);
-//router.post('/signup', validationSingUp, createUser);
+router.post('/signup', validationSingUp, createUser);
 
 router.use(cookieParser());
 router.use('/users', auth, users);
