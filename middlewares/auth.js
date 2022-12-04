@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-
 const { JWT_SECRET, NODE_ENV } = process.env;
 const IncorrectMailOrPassword = require('../errors/IncorrectMailPassword');
 
