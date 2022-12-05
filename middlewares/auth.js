@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET, NODE_ENV } = process.env;
+const developerMode = require('../constants');
 const IncorrectMailOrPassword = require('../errors/IncorrectMailPassword');
+
+const { JWT_SECRET, NODE_ENV } = process.env;
 
 module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -10,7 +12,7 @@ module.exports = (req, res, next) => {
   }
   let payload;
   try {
-    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : developerMode);
   } catch (err) {
     next(new IncorrectMailOrPassword('Необходима авторизация.'));
     return;

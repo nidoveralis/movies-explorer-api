@@ -1,6 +1,7 @@
 const Movie = require('../models/movie');
 const IncorrectData = require('../errors/IncorrectData');
 const NotFound = require('../errors/NotFound');
+const ErrorForbidden = require('../errors/ErrorForbidden');
 
 module.exports.getMoveis = (req, res, next) => {
   Movie.find({})
@@ -62,10 +63,17 @@ module.exports.deleteMovie = (req, res, next) => {
     .then((movie) => {
       if (movie == null) {
         next(new NotFound('Фильм не найден.'));
-      } else {
-        res.send({ data: movie });
+      } else if (JSON.stringify(req.user._id) !== JSON.stringify(movie.owner)) {
+        next(new ErrorForbidden('Нельзя удалить чужую карточку'));
       }
-      return movie.remove();
+      return movie.remove()
+        .then(() => res.send({ message: 'Карточка удалена' }));
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        next(new IncorrectData('Некорректный id'));
+      } else {
+        next(err);
+      }
+    });
 };

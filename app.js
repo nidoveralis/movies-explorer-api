@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const router = require('./routes/router');
 const { errorLogger, requestLogger } = require('./middlewares/logger');
 const errorsHandler = require('./middlewares/errorsHandler');
+const mongoServer = require('./constants');
 
 const { PORT = 3000 } = process.env;
 
@@ -37,15 +38,10 @@ app.use((req, res, next) => {
   return next();
 });
 
-// dominname
-// api.movie.diak.nomoredomains.club
-// movie.diakova.nomoredomains.club
-// 51.250.73.230
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://0.0.0.0:27017/moviedb');
+mongoose.connect(mongoServer);
 
 app.use(requestLogger);
 app.use(router);
