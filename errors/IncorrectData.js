@@ -1,4 +1,4 @@
-const ERROR_CODE_INCORRECT_DATA = require('../constants');
+const { ERROR_CODE_INCORRECT_DATA }= require('../constants');
 
 module.exports = class IncorrectData extends Error {
   constructor(message) {

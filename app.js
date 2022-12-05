@@ -3,11 +3,12 @@ const express = require('express');
 const { errors } = require('celebrate');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
-const router = require('./routes/router');
+const router = require('./routes');
 const { errorLogger, requestLogger } = require('./middlewares/logger');
 const errorsHandler = require('./middlewares/errorsHandler');
-const mongoServer = require('./constants');
+const {mongoServer} = require('./constants');
 
 const { PORT = 3000 } = process.env;
 
@@ -20,6 +21,7 @@ const allowedCors = [
 ];
 
 const app = express();
+app.use(helmet());
 
 app.use((req, res, next) => {
   const { origin } = req.headers;

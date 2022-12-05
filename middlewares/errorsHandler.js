@@ -1,4 +1,4 @@
-const ERROR_CODE_DEFAYLT = require('../constants');
+const {ERROR_CODE_DEFAYLT} = require('../constants');
 
 module.exports = (err, req, res, next) => {
   const statusCode = err.statusCode || ERROR_CODE_DEFAYLT;
