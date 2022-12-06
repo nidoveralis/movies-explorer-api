@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(NODE_ENV === 'production' ? mongoServer : 'mongodb://0.0.0.0:27017/moviedb');
+mongoose.connect(NODE_ENV === 'production' ? mongoServer : 'mongodb://0.0.0.0:27017/moviesdb');
 
 app.use(requestLogger);
 app.use(router);
