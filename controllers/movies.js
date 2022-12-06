@@ -49,12 +49,12 @@ module.exports.addMovie = (req, res, next) => {
       nameRU: data.nameRU,
       nameEN: data.nameEN,
     }))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(new IncorrectData('Переданы некорректные данные.'));
-      } else {
-        next(err);
-      }
+    .catch((err) => { console.log(err)
+      //if (err.name === 'ValidationError') {
+        //next(new IncorrectData('Переданы некорректные данные.'));
+      //} else {
+        ///next(err);
+     // }
     });
 };
 
