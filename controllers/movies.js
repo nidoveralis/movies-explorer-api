@@ -49,12 +49,12 @@ module.exports.addMovie = (req, res, next) => {
       nameRU: data.nameRU,
       nameEN: data.nameEN,
     }))
-    .catch((err) => { console.log(err)
-      //if (err.name === 'ValidationError') {
-        //next(new IncorrectData('Переданы некорректные данные.'));
-      //} else {
-        ///next(err);
-     // }
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        next(new IncorrectData('Переданы некорректные данные.'));
+      } else {
+        next(err);
+      }
     });
 };
 
@@ -64,7 +64,7 @@ module.exports.deleteMovie = (req, res, next) => {
       if (movie == null) {
         next(new NotFound('Фильм не найден.'));
       } else if (JSON.stringify(req.user._id) !== JSON.stringify(movie.owner)) {
-        next(new ErrorForbidden('Нельзя удалить чужую карточку'));
+        return next(new ErrorForbidden('Нельзя удалить чужую карточку'));
       }
       return movie.remove()
         .then(() => res.send({ message: 'Карточка удалена' }));
