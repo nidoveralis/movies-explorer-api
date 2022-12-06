@@ -35,7 +35,7 @@ userSchema.statics.findUserByCreditals = function ({ email, password }) {
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            throw new IncorrectImailOrPassword('Неправильные пароль.');
+            throw new IncorrectImailOrPassword('Неправильные почта или пароль.');
           }
           return user;
         });

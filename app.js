@@ -8,9 +8,8 @@ const helmet = require('helmet');
 const router = require('./routes');
 const { errorLogger, requestLogger } = require('./middlewares/logger');
 const errorsHandler = require('./middlewares/errorsHandler');
-const { mongoServer } = require('./constants');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, NODE_ENV, mongoServer } = process.env;
 
 const allowedCors = [
   'https://movie.diakova.nomoredomains.club',
@@ -43,8 +42,8 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(mongoServer);
-
+mongoose.connect(NODE_ENV === 'production' ? mongoServer : 'mongodb://0.0.0.0:27017/moviedb');
+console.log(NODE_ENV, mongoServer )
 app.use(requestLogger);
 app.use(router);
 

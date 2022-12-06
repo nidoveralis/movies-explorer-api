@@ -9,22 +9,27 @@ const NotFound = require('../errors/NotFound');
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.createUser = (req, res, next) => {
-  const { name, email } = req.body;
+  const {
+    name, email,
+  } = req.body;
   bcrypt.hash(req.body.password, 10)
-    .then((hash) => {
-      User.create({ name, email, password: hash })
-        .then((user) => res.status(200).send({ name: user.name, email: user.email }))
-        .catch((err) => {
-          if (err.code === 11000) {
-            next(new ErrorMailUsed('Пользователь с таким email уже зарегистрирован.'));
-          // } if (statusCode == 400) {
-          } if (err.name === 'ValidationError') {
-            next(new IncorrectData('Переданы некорректные данные.'));
-          } else {
-            next(err.statusCode);
-          }
-        });
-    });
+    .then((hash) => User.create({
+      name, email, password: hash,
+    })
+      .then((user) => res.send({
+        name: user.name, email: user.email,
+      }))
+      .catch((err) => {
+        if (err.code === 11000) {
+          next(new ErrorMailUsed('Пользователь с таким email уже зарегистрирован.'));
+          return;
+        }
+        if (err.name === 'ValidationError') {
+          next(new IncorrectData('Переданы некорректные данные.'));
+        } else {
+          next(err);
+        }
+      }));
 };
 
 module.exports.login = (req, res, next) => {
@@ -35,9 +40,7 @@ module.exports.login = (req, res, next) => {
       res.cookie('jwt', token, { maxAge: 3600000, httpOnly: true });
       res.status(200).send({ token });
     })
-    .catch(() => {
-      next();
-    });
+    .catch(next);
 };
 
 module.exports.exit = (req, res) => {
@@ -51,7 +54,7 @@ module.exports.getUserMe = (req, res, next) => {
       if (user === null) {
         next(new NotFound('Пользователь не найден.'));
       } else {
-        res.send(user);
+        res.status(200).send(user);
       }
     })
     .catch((err) => {
@@ -66,7 +69,7 @@ module.exports.getUserMe = (req, res, next) => {
 module.exports.editUser = (req, res, next) => {
   const { name, email } = req.body;
   User.findByIdAndUpdate(req.user._id, { name, email }, { runValidators: true, new: true })
-    .then((user) => res.send(user))
+    .then((user) => res.status(200).send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new IncorrectData('Переданы некорректные данные при обновлении профиля.'));

@@ -1,8 +1,6 @@
-const { ERROR_CODE_DEFAYLT } = require('../constants');
-
 module.exports = (err, req, res, next) => {
-  const statusCode = err.statusCode || ERROR_CODE_DEFAYLT;
-  const message = statusCode === ERROR_CODE_DEFAYLT ? 'На сервере произошла ошибка' : err.message;
+  const statusCode = err.statusCode || 500;
+  const message = statusCode === 500 ? 'На сервере произошла ошибка' : err.message;
 
   res.status(statusCode).send({ message });
   next();
