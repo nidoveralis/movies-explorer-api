@@ -1,4 +1,4 @@
-const {ERROR_CODE_INCORRECT_MAIL_PASSWORD} = require('../constants');
+const { ERROR_CODE_INCORRECT_MAIL_PASSWORD } = require('../constants');
 
 module.exports = class IncorrectMailOrPassword extends Error {
   constructor(message) {

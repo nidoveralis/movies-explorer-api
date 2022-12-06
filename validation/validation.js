@@ -35,7 +35,7 @@ module.exports.validationAddedMovie = celebrate({
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
     thumbnail: Joi.string().required().pattern(linkValidation),
-    id: Joi.number().required(),
+    movieId: Joi.number().required(),
   }),
 });
 

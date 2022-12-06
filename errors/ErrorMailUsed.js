@@ -1,4 +1,4 @@
-const { ERROR_CODE_EMAIL_USED }= require('../constants');
+const { ERROR_CODE_EMAIL_USED } = require('../constants');
 
 module.exports = class ErroeMailUsed extends Error {
   constructor(message) {

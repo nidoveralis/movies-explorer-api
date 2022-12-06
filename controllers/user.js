@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const {developerMode} = require('../constants');
+const { developerMode } = require('../constants');
 const ErrorMailUsed = require('../errors/ErrorMailUsed');
 const IncorrectData = require('../errors/IncorrectData');
 const NotFound = require('../errors/NotFound');
@@ -43,12 +43,6 @@ module.exports.login = (req, res, next) => {
 module.exports.exit = (req, res) => {
   res.clearCookie('jwt', { httpOnly: true });
   res.status(200).send({ message: 'Вы вышли.' });
-};
-
-module.exports.getUser = (req, res, next) => {
-  User.find({})
-    .then((user) => res.status(200).send(user))
-    .catch(next);
 };
 
 module.exports.getUserMe = (req, res, next) => {

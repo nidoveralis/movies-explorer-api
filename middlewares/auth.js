@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {developerMode} = require('../constants');
+const { developerMode } = require('../constants');
 const IncorrectMailOrPassword = require('../errors/IncorrectMailPassword');
 
 const { JWT_SECRET, NODE_ENV } = process.env;

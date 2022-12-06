@@ -1,4 +1,4 @@
-const {ERROR_CODE_DEFAYLT} = require('../constants');
+const { ERROR_CODE_DEFAYLT } = require('../constants');
 
 module.exports = class ErrorDefault extends Error {
   constructor(message) {

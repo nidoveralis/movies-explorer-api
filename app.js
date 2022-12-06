@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const router = require('./routes');
 const { errorLogger, requestLogger } = require('./middlewares/logger');
 const errorsHandler = require('./middlewares/errorsHandler');
-const {mongoServer} = require('./constants');
+const { mongoServer } = require('./constants');
 
 const { PORT = 3000 } = process.env;
 
