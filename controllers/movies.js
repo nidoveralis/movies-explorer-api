@@ -4,8 +4,9 @@ const NotFound = require('../errors/NotFound');
 const ErrorForbidden = require('../errors/ErrorForbidden');
 
 module.exports.getMoveis = (req, res, next) => {
-  Movie.find({})
-    .then((data) => res.status(200).send(data))
+  const owner = req.user._id;
+  Movie.find({ owner })
+    .then((data) => res.status(200).send({ data }))
     .catch(next);
 };
 module.exports.addMovie = (req, res, next) => {
