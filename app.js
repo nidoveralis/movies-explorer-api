@@ -9,6 +9,7 @@ const router = require('./routes');
 const { errorLogger, requestLogger } = require('./middlewares/logger');
 const errorsHandler = require('./middlewares/errorsHandler');
 const { mongoServerDeveloper } = require('./constants');
+const { limiter } = require('./middlewares/rateLimiter');
 
 const { PORT = 3000, NODE_ENV, mongoServer } = process.env;
 
@@ -46,6 +47,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect(NODE_ENV === 'production' ? mongoServer : mongoServerDeveloper);
 
 app.use(requestLogger);
+app.use(limiter);
 app.use(router);
 
 app.use(errorLogger);
