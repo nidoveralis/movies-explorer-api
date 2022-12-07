@@ -52,4 +52,4 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorsHandler);
 
-app.listen(PORT);
+app.listen(PORT,()=>console.log(NODE_ENV, mongoServer ));
