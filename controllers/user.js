@@ -78,6 +78,10 @@ module.exports.editUser = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { name, email }, { runValidators: true, new: true })
     .then((user) => res.status(200).send(user))
     .catch((err) => {
+      if (err.code === 11000) {
+        next(new ErrorMailUsed(MESSAGE_USED_EMAIL));
+        return;
+      }
       if (err.name === 'ValidationError') {
         next(new IncorrectData(MESSAGE_INCORRECT_DATA));
       } else {
