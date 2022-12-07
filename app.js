@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(NODE_ENV === 'production' ? mongoServer : mongoServerDeveloper);
+mongoose.connect(NODE_ENV === 'production' ? mongoServerDeveloper : mongoServerDeveloper);
 
 app.use(requestLogger);
 app.use(router);
@@ -52,4 +52,4 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorsHandler);
 
-app.listen(PORT,()=>console.log(NODE_ENV, mongoServer ));
+app.listen(PORT,()=>console.log(PORT));
