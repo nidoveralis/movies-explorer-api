@@ -5,6 +5,13 @@ const { developerMode } = require('../constants');
 const ErrorMailUsed = require('../errors/ErrorMailUsed');
 const IncorrectData = require('../errors/IncorrectData');
 const NotFound = require('../errors/NotFound');
+const {
+  MESSAGE_INCORRECT_DATA,
+  MESSAGE_INCORRECT_ID,
+  MESSAGE_USED_EMAIL,
+  MESSAGE_WELCOME,
+  MESSAGE_USER_NOT_FOUND,
+} = require('../constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -21,11 +28,11 @@ module.exports.createUser = (req, res, next) => {
       }))
       .catch((err) => {
         if (err.code === 11000) {
-          next(new ErrorMailUsed('Пользователь с таким email уже зарегистрирован.'));
+          next(new ErrorMailUsed(MESSAGE_USED_EMAIL));
           return;
         }
         if (err.name === 'ValidationError') {
-          next(new IncorrectData('Переданы некорректные данные.'));
+          next(new IncorrectData(MESSAGE_INCORRECT_DATA));
         } else {
           next(err);
         }
@@ -45,21 +52,21 @@ module.exports.login = (req, res, next) => {
 
 module.exports.exit = (req, res) => {
   res.clearCookie('jwt', { httpOnly: true });
-  res.status(200).send({ message: 'Вы вышли.' });
+  res.status(200).send({ message: MESSAGE_WELCOME });
 };
 
 module.exports.getUserMe = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
       if (user === null) {
-        next(new NotFound('Пользователь не найден.'));
+        next(new NotFound(MESSAGE_USER_NOT_FOUND));
       } else {
         res.status(200).send(user);
       }
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new IncorrectData('Некорректный id'));
+        next(new IncorrectData(MESSAGE_INCORRECT_ID));
       } else {
         next(err);
       }
@@ -72,7 +79,7 @@ module.exports.editUser = (req, res, next) => {
     .then((user) => res.status(200).send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new IncorrectData('Переданы некорректные данные при обновлении профиля.'));
+        next(new IncorrectData(MESSAGE_INCORRECT_DATA));
       } else {
         next(err);
       }

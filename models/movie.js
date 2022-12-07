@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { isURL } = require('validator');
+const { MESSAGE_INCORRECT_LINK } = require('../constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -27,7 +28,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator: (v) => isURL(v, { required_protocol: true }),
-      message: 'Некорректная ссылка',
+      message: MESSAGE_INCORRECT_LINK,
     },
   },
   trailerLink: {
@@ -35,7 +36,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator: (v) => isURL(v, { required_protocol: true }),
-      message: 'Некорректная ссылка',
+      message: MESSAGE_INCORRECT_LINK,
     },
   },
   thumbnail: {
@@ -43,7 +44,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator: (v) => isURL(v, { required_protocol: true }),
-      message: 'Некорректная ссылка',
+      message: MESSAGE_INCORRECT_LINK,
     },
   },
   owner: {
