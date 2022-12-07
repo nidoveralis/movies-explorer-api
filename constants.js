@@ -6,6 +6,7 @@ const ERROR_CODE_NOT_FOUND = 404;
 const ERROR_CODE_EMAIL_USED = 409;
 const ERROR_CODE_DEFAYLT = 500;
 const developerMode = 'dev-secret';
+const mongoServerDeveloper = 'mongodb://0.0.0.0:27017/moviesdb';
 
 module.exports = {
   ERROR_CODE_INCORRECT_DATA,
@@ -16,4 +17,5 @@ module.exports = {
   ERROR_CODE_FORBIDDEN,
   linkValidation,
   developerMode,
+  mongoServerDeveloper,
 };

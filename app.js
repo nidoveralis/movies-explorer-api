@@ -8,6 +8,7 @@ const helmet = require('helmet');
 const router = require('./routes');
 const { errorLogger, requestLogger } = require('./middlewares/logger');
 const errorsHandler = require('./middlewares/errorsHandler');
+const { mongoServerDeveloper } = require('./constants');
 
 const { PORT = 3000, NODE_ENV, mongoServer } = process.env;
 
@@ -42,7 +43,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(NODE_ENV === 'production' ? mongoServer : 'mongodb://0.0.0.0:27017/moviesdb');
+mongoose.connect(NODE_ENV === 'production' ? mongoServer : mongoServerDeveloper);
 
 app.use(requestLogger);
 app.use(router);
@@ -51,4 +52,4 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorsHandler);
 
-app.listen(PORT, () => console.log(PORT));
+app.listen(PORT);
