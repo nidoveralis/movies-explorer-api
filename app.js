@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(NODE_ENV === 'production' ? mongoServerDeveloper : mongoServerDeveloper);
+mongoose.connect(NODE_ENV === 'production' ? mongoServer : mongoServerDeveloper);
 
 app.use(requestLogger);
 app.use(router);

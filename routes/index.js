@@ -11,9 +11,9 @@ router.post('/signin', validationSingIn, login);
 router.post('/signup', validationSingUp, createUser);
 
 router.use(cookieParser());
-router.use('/users', users);
-router.use('/movies', movies);
-router.post('/signout', exit);
+router.use('/users', auth, users);
+router.use('/movies', auth, movies);
+router.post('/signout', auth, exit);
 
 router.use('*', auth, (req, res, next) => {
   next(new NotFound('Страница не найдена.'));
