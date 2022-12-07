@@ -2,9 +2,10 @@ const jwt = require('jsonwebtoken');
 const { developerMode } = require('../constants');
 const IncorrectMailOrPassword = require('../errors/IncorrectMailPassword');
 
-const { JWT_SECRET, NODE_ENV } = process.env;
+const { JWT_SECRET, NODE_ENV, mongoServer } = process.env;
 
 module.exports = (req, res, next) => {
+  console.log(JWT_SECRET, NODE_ENV, mongoServer)
   const token = req.cookies.jwt;
   if (!token) {
     next(new IncorrectMailOrPassword('Необходима авторизация.'));
