@@ -17,7 +17,7 @@ const MESSAGE_WELCOME = 'Вы вышли.';
 const MESSAGE_NEED_AUTH = 'Необходима авторизация.';
 const MESSAGE_DEFAYLT_ERROR = 'На сервере произошла ошибка';
 const MESSAGE_INCORRECT_LINK = 'Некорректная ссылка';
-const MESSAGE_INCORRECT_MAIL_OR_PASSWOR = 'Неправильные почта или пароль.';
+const MESSAGE_INCORRECT_MAIL_OR_PASSWOR = 'Вы ввели неправильный логин или пароль.';
 
 const developerMode = 'dev-secret';
 const mongoServerDeveloper = 'mongodb://0.0.0.0:27017/moviesdb';

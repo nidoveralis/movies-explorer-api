@@ -54,6 +54,7 @@ module.exports.addMovie = (req, res, next) => {
       image: data.image,
       trailerLink: data.trailerLink,
       thumbnail: data.thumbnail,
+      owner: data.owner,
       nameRU: data.nameRU,
       nameEN: data.nameEN,
     }))

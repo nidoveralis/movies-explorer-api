@@ -47,7 +47,13 @@ module.exports.login = (req, res, next) => {
       res.cookie('jwt', token, { maxAge: 3600000, httpOnly: true });
       res.status(200).send({ token });
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.statusCode === 400) {
+        next(new IncorrectData(MESSAGE_INCORRECT_DATA));
+      } else {
+        next(err);
+      }
+    });
 };
 
 module.exports.exit = (req, res) => {
