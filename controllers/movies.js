@@ -50,6 +50,7 @@ module.exports.addMovie = (req, res, next) => {
       director: data.director,
       duration: data.duration,
       year: data.year,
+      _id: data._id,
       description: data.description,
       image: data.image,
       trailerLink: data.trailerLink,
