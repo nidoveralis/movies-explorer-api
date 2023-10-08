@@ -1,4 +1,4 @@
-# movies-explorer-api
+# Movies explorer (backend)
 
 ## Описание
 
